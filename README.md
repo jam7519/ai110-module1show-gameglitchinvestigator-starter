@@ -25,28 +25,46 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+Game Purpose
+
+The Game Glitch Investigator is a number guessing game built with Streamlit. The player tries to guess a secret number within a limited number of attempts while receiving hints that indicate whether the guess is too high or too low.
+
+Bugs Found
+
+1. The secret number was being reset unexpectedly, making the game difficult or impossible to win.
+2. The hint logic was incorrect and returned misleading "Too High" and "Too Low" messages.
+3. Core game logic was mixed into the Streamlit UI instead of being separated into reusable functions.
+
+Fixes Applied
+
+1. Moved the game logic functions into logic_utils.py.
+2. Corrected the guess comparison logic so hints match the player's guess.
+2. Added automated tests in tests/test_game_logic.py.
+4. Verified all tests pass using pytest.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. Start the game and select the Normal difficulty level.
+2. Enter a guess lower than the secret number and receive a "Too Low" message.
+3. Enter a guess higher than the secret number and receive a "Too High" message.
+4. Continue narrowing the range using the hints.
+5. Enter the correct secret number and receive the "Win" outcome.
+6. The score updates correctly based on the outcome and attempt number.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+(.venv) PS C:\Training_2\ai110-module1show-gameglitchinvestigator-starter> python -m pytest
+
+collected 3 items
+
+tests/test_game_logic.py ...                                  [100%]
+
+3 passed in 0.07s
 ```
 
 ## 🚀 Stretch Features
