@@ -53,7 +53,7 @@ Describe your fixed game in numbered steps so a reader can follow along without 
 5. Enter the correct secret number and receive the "Win" outcome.
 6. The score updates correctly based on the outcome and attempt number.
 
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+
 
 ## 🧪 Test Results
 
@@ -67,6 +67,3 @@ tests/test_game_logic.py ...                                  [100%]
 3 passed in 0.07s
 ```
 
-## 🚀 Stretch Features
-
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
