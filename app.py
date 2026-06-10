@@ -2,6 +2,7 @@ import random
 import streamlit as st
 
 def get_range_for_difficulty(difficulty: str):
+    """Return the low and high number range for the selected difficulty."""
     if difficulty == "Easy":
         return 1, 20
     if difficulty == "Normal":
@@ -12,10 +13,8 @@ def get_range_for_difficulty(difficulty: str):
 
 
 def parse_guess(raw: str):
-    if raw is None:
-        return False, None, "Enter a guess."
-
-    if raw == "":
+    """Parse user input into an integer guess."""
+    if raw is None or raw == "":
         return False, None, "Enter a guess."
 
     try:
@@ -30,37 +29,32 @@ def parse_guess(raw: str):
 
 
 def check_guess(guess, secret):
-    if guess == secret:
-        return "Win", "🎉 Correct!"
+    """Compare the guess to the secret number."""
+    guess = int(guess)
+    secret = int(secret)
 
-    try:
-        if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
-        else:
-            return "Too Low", "📉 Go LOWER!"
-    except TypeError:
-        g = str(guess)
-        if g == secret:
-            return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+    if guess == secret:
+        return "Win"
+
+    if guess > secret:
+        return "Too High"
+
+    return "Too Low"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
+    """Update score based on the result of the guess."""
     if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
+        points = 100 - 10 * attempt_number
         if points < 10:
             points = 10
         return current_score + points
 
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
+    if outcome in ["Too High", "Too Low"]:
+        new_score = current_score - 5
+        if new_score < 0:
+            return 0
+        return new_score
 
     return current_score
 
